@@ -1,13 +1,13 @@
 ﻿// See https://aka.ms/new-console-template for more information
+
 using System;
+using Bsss_BusinessDataLogic;
+
 
 namespace BookSerene
 {
     internal class Program
     {
-        static string reservation = "No reservation made.";
-        static string[] services = { "Massages", "Facials", "Body Treatments", "Hair Services", "Nail Services", "Makeup services" };
-
         static void Main(string[] args)
         {
             Console.WriteLine("\nWelcome to Serene Spa & Salon!");
@@ -31,16 +31,14 @@ namespace BookSerene
                         break;
                     case 4:
                         running = false;
-                        Console.WriteLine("Thank you for choosing Serene Spa & Salon. Have a great day!!");
+                        Console.WriteLine("\nThank you for choosing Serene Spa & Salon. Have a great day!");
                         break;
                     default:
-                        Console.WriteLine("Invalid choice. Please try again.");
+                        Console.WriteLine("\nInvalid choice. Please try again.");
                         break;
                 }
             }
         }
-
-
         static void ShowMenu()
         {
             Console.WriteLine("\nWhat would you like to do?");
@@ -49,7 +47,6 @@ namespace BookSerene
             Console.WriteLine("[3] Cancel Reservation");
             Console.WriteLine("[4] Exit");
         }
-
 
         static int GetUserChoice()
         {
@@ -62,16 +59,14 @@ namespace BookSerene
             return choice;
         }
 
-
         static void ShowAvailableServices()
         {
             Console.WriteLine("\nAvailable Services:");
-            foreach (var service in services)
+            foreach (string service in BsssProcess.Services) 
             {
                 Console.WriteLine($"- {service}");
             }
         }
-
 
         static void BookService()
         {
@@ -87,53 +82,46 @@ namespace BookSerene
             string dateTime = Console.ReadLine();
 
             Console.WriteLine("\nChoose a service:");
-            for (int i = 0; i < services.Length; i++)
+            for (int i = 0; i < BsssProcess.Services.Length; i++)
             {
-                Console.WriteLine($"[{i + 1}] {services[i]}");
+                Console.WriteLine($"[{i + 1}] {BsssProcess.Services[i]}");
             }
 
             int serviceChoice;
-            while (!int.TryParse(Console.ReadLine(), out serviceChoice) || serviceChoice < 1 || serviceChoice > services.Length)
+            while (!int.TryParse(Console.ReadLine(), out serviceChoice) || serviceChoice < 1 || serviceChoice > BsssProcess.Services.Length)
             {
-                Console.Write($"Invalid choice. Please enter a number between 1 and {services.Length}: ");
+                Console.Write($"Invalid choice. Please enter a number between 1 and {BsssProcess.Services.Length}: ");
             }
 
-            reservation = $"Reservation for {name} on {dateTime} for {services[serviceChoice - 1]}";
-            Console.WriteLine("\nReservation successful!");
-        }
+            string newReservation = $"Reservation for {name} on {dateTime} for {BsssProcess.Services[serviceChoice - 1]}";
+            bool success = BsssProcess.UpdateReservation(2, newReservation);
 
-
-        static void CancelReservation()
-        {
-            Console.WriteLine("\nCanceling Reservation");
-            if (reservation == "No reservation made.")
+            if (success)
             {
-                Console.WriteLine("You have no reservations to cancel.");
+                Console.WriteLine("\nReservation successful!");
             }
             else
             {
-                reservation = "No reservation made.";
-                Console.WriteLine("Reservation canceled successfully.");
+                Console.WriteLine("\nReservation failed. Please try again.");
             }
         }
 
-
-        static void UpdateReservation(int action, string newReservation)
+        static void CancelReservation()
         {
-            if (action == 2)
+            bool success = BsssProcess.UpdateReservation(3, "");
+            if (success)
             {
-                reservation = newReservation;
+                Console.WriteLine("\nReservation canceled successfully.");
             }
-            else if (action == 3)
+            else
             {
-                reservation = "No reservation made.";
+                Console.WriteLine("\nYou have no reservations to cancel.");
             }
         }
-
 
         static void ShowCurrentReservation()
         {
-            Console.WriteLine($"\nCurrent Reservation: {reservation}");
+            Console.WriteLine($"\nCurrent Reservation: {BsssProcess.GetReservation()}");
         }
     }
 }

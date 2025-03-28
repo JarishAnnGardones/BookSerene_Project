@@ -7,4 +7,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Bsss_BusinessDataLogic\**" />
+    <EmbeddedResource Remove="Bsss_BusinessDataLogic\**" />
+    <None Remove="Bsss_BusinessDataLogic\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="Bsss_BusinessDataLogic\Bsss_BusinessDataLogic.csproj" />
+  </ItemGroup>
+	
 </Project>
+
