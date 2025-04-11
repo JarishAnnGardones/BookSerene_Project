@@ -5,7 +5,11 @@ VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookSerene", "BookSerene.csproj", "{8917042F-BD6F-4DA9-A0AF-E73F79C452AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bsss_BusinessDataLogic", "Bsss_BusinessDataLogic\Bsss_BusinessDataLogic.csproj", "{EE512D77-AD50-4439-8730-98082F910B7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BsssBLogic", "Bsss_BusinessDataLogic\BsssBLogic.csproj", "{EE512D77-AD50-4439-8730-98082F910B7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BsssDLogic", "BsssDLogic\BsssDLogic.csproj", "{8225180A-73C9-4658-AB41-57D6A2343D5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BsssCommon", "BsssCommon\BsssCommon.csproj", "{F4A2CA41-B1FE-4D17-B2BA-DDEC6E4C9F3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{EE512D77-AD50-4439-8730-98082F910B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE512D77-AD50-4439-8730-98082F910B7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE512D77-AD50-4439-8730-98082F910B7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8225180A-73C9-4658-AB41-57D6A2343D5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8225180A-73C9-4658-AB41-57D6A2343D5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8225180A-73C9-4658-AB41-57D6A2343D5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8225180A-73C9-4658-AB41-57D6A2343D5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4A2CA41-B1FE-4D17-B2BA-DDEC6E4C9F3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4A2CA41-B1FE-4D17-B2BA-DDEC6E4C9F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4A2CA41-B1FE-4D17-B2BA-DDEC6E4C9F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4A2CA41-B1FE-4D17-B2BA-DDEC6E4C9F3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

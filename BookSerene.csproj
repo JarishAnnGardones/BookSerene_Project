@@ -8,13 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="BsssCommon\**" />
+    <Compile Remove="BsssDLogic\**" />
     <Compile Remove="Bsss_BusinessDataLogic\**" />
+    <EmbeddedResource Remove="BsssCommon\**" />
+    <EmbeddedResource Remove="BsssDLogic\**" />
     <EmbeddedResource Remove="Bsss_BusinessDataLogic\**" />
+    <None Remove="BsssCommon\**" />
+    <None Remove="BsssDLogic\**" />
     <None Remove="Bsss_BusinessDataLogic\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="Bsss_BusinessDataLogic\Bsss_BusinessDataLogic.csproj" />
+    <ProjectReference Include="Bsss_BusinessDataLogic\BsssBLogic.csproj" />
   </ItemGroup>
 	
 </Project>
