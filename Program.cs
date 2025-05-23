@@ -7,6 +7,7 @@ using BsssBLogic;
 
 
 
+
 namespace BookSerene
 {
     public class Program
@@ -77,11 +78,11 @@ namespace BookSerene
             Console.Write("Enter your contact info: ");
             string contact = Console.ReadLine();
 
-            Console.Write("Enter booking date and time (yyyy-MM-dd h:mm tt): ");
+            Console.Write("Enter booking date and time (yyyy-MM-dd hh:mm tt): ");
             DateTime dateTime;
-            while (!DateTime.TryParseExact(Console.ReadLine(), "yyyy-MM-dd h:mm tt", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
+            while (!DateTime.TryParseExact(Console.ReadLine(), "yyyy-MM-dd hh:mm tt", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
             {
-                Console.WriteLine("Invalid format. Try again (yyyy-MM-dd h:mm tt): ");
+                Console.WriteLine("Invalid format. Try again (yyyy-MM-dd hh:mm tt): ");
             }
 
             ViewServices();
@@ -164,9 +165,9 @@ namespace BookSerene
 
                 if (choice == 1)
                 {
-                    Console.Write("Enter new date and time (yyyy-MM-dd h:mm tt): ");
+                    Console.Write("Enter new date and time (yyyy-MM-dd hh:mm tt): ");
                     DateTime newDate;
-                    while (!DateTime.TryParseExact(Console.ReadLine(), "yyyy-MM-dd h:mm tt", CultureInfo.InvariantCulture, DateTimeStyles.None, out newDate))
+                    while (!DateTime.TryParseExact(Console.ReadLine(), "yyyy-MM-dd hh:mm tt", CultureInfo.InvariantCulture, DateTimeStyles.None, out newDate))
                     {
                         Console.Write("Invalid format. Try again: ");
                     }
