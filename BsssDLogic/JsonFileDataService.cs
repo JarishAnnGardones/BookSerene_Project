@@ -13,7 +13,7 @@ namespace BsssDLogic
     public class JsonFileDataService : IBsssDataService
     {
         private string jsonFilePath = "bsss.json";
-        private  List<Booking> bookings = new List<Booking>();
+        private List<Booking> bookings = new List<Booking>();
 
         public JsonFileDataService()
         {
@@ -34,7 +34,6 @@ namespace BsssDLogic
             var json = JsonSerializer.Serialize(bookings, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(jsonFilePath, json);
             Console.WriteLine($"Saved JSON to: {Path.GetFullPath("bsss.json")}");
-
         }
 
         public void CreateBooking(Booking booking)
@@ -48,21 +47,21 @@ namespace BsssDLogic
             return bookings;
         }
 
-        public void UpdateBooking(Booking Updatebooking)
+        public void UpdateBooking(Booking updatedBooking)
         {
-            var existing = bookings.FirstOrDefault(b => b.Contact == Updatebooking.Contact && b.DateTime == Updatebooking.DateTime);
+            var existing = bookings.FirstOrDefault(b => b.Contact == updatedBooking.Contact);
             if (existing != null)
             {
-                existing.Name = Updatebooking.Name;
-                existing.Service = Updatebooking.Service;
-                existing.DateTime = Updatebooking.DateTime;
+                existing.Name = updatedBooking.Name;
+                existing.Service = updatedBooking.Service;
+                existing.DateTime = updatedBooking.DateTime;
                 SaveToJson();
             }
         }
 
         public bool DeleteBooking(Booking booking)
         {
-            var toRemove = bookings.FirstOrDefault(b => b.Contact == booking.Contact && b.DateTime == booking.DateTime);
+            var toRemove = bookings.FirstOrDefault(b => b.Contact == booking.Contact);
             if (toRemove != null)
             {
                 bookings.Remove(toRemove);
@@ -73,3 +72,4 @@ namespace BsssDLogic
         }
     }
 }
+

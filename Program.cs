@@ -1,10 +1,12 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using System;
-using System.Globalization;
-using System.Collections.Generic;
-using BsssBLogic;
 
+
+
+using BsssBLogic;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 
 
 
@@ -196,5 +198,3 @@ namespace BookSerene
         }
     }
 }
-
-    

@@ -15,8 +15,6 @@ namespace BsssDLogic
     {
         private static string filePath = "bsss.txt";
         private List<Booking> bookings = new List<Booking>();
-
-      
         private char delimiter = '|';
 
         public TextFileDataService()
@@ -26,7 +24,7 @@ namespace BsssDLogic
 
         private void LoadFromText()
         {
-            bookings.Clear(); 
+            bookings.Clear();
 
             if (!File.Exists(filePath)) return;
 
@@ -34,7 +32,7 @@ namespace BsssDLogic
             bookings = lines.Select(line =>
             {
                 var parts = line.Split(delimiter);
-                if (parts.Length == 4) 
+                if (parts.Length == 4)
                 {
                     return new Booking
                     {
@@ -45,8 +43,7 @@ namespace BsssDLogic
                     };
                 }
                 return null;
-            }) .Where(b => b != null) 
-            .ToList();
+            }).Where(b => b != null).ToList();
         }
 
         private void SaveToText()
@@ -55,8 +52,6 @@ namespace BsssDLogic
                 $"{b.Name}{delimiter}{b.Contact}{delimiter}{b.DateTime:O}{delimiter}{b.Service}");
 
             File.WriteAllLines(filePath, lines);
-
-            
             Console.WriteLine($"Saved TXT to: {Path.GetFullPath("bsss.txt")}");
         }
 
@@ -71,27 +66,24 @@ namespace BsssDLogic
             return bookings;
         }
 
-        public void UpdateBooking(Booking Updatebooking)
+        public void UpdateBooking(Booking updatedBooking)
         {
-            var existing = bookings.FirstOrDefault(b => b.Contact == Updatebooking.Contact && b.DateTime == Updatebooking.DateTime);
+            var existing = bookings.FirstOrDefault(b => b.Contact == updatedBooking.Contact);
             if (existing != null)
             {
-                existing.Name = Updatebooking.Name;
-                existing.Service = Updatebooking.Service;
-                existing.DateTime = Updatebooking.DateTime;
-                   
-
+                existing.Name = updatedBooking.Name;
+                existing.Service = updatedBooking.Service;
+                existing.DateTime = updatedBooking.DateTime;
                 SaveToText();
             }
         }
 
         public bool DeleteBooking(Booking booking)
         {
-            var toRemove = bookings.FirstOrDefault(b => b.Contact == booking.Contact && b.DateTime == booking.DateTime);
+            var toRemove = bookings.FirstOrDefault(b => b.Contact == booking.Contact);
             if (toRemove != null)
             {
                 bookings.Remove(toRemove);
-
                 SaveToText();
                 return true;
             }

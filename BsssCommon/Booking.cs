@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace BsssCommon
 {
     public class Booking
+
     {
         public string Name { get; set; }
         public string Contact { get; set; }
@@ -18,4 +19,4 @@ namespace BsssCommon
             return $"{Name} | {Contact} | {DateTime:yyyy-MM-dd  hh:mm tt} | {Service}";
         }
     }
-}
+    }

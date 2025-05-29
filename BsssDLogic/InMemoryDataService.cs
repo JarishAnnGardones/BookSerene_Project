@@ -28,17 +28,18 @@ namespace BsssDLogic
 
         public void UpdateBooking(Booking booking)
         {
-            var existing = bookings.FirstOrDefault(b => b.Contact == booking.Contact && b.DateTime == booking.DateTime);
+            var existing = bookings.FirstOrDefault(b => b.Contact == booking.Contact);
             if (existing != null)
             {
                 existing.Name = booking.Name;
                 existing.Service = booking.Service;
+                existing.DateTime = booking.DateTime;
             }
         }
 
         public bool DeleteBooking(Booking booking)
         {
-            var toRemove = bookings.FirstOrDefault(b => b.Contact == booking.Contact && b.DateTime == booking.DateTime);
+            var toRemove = bookings.FirstOrDefault(b => b.Contact == booking.Contact);
             if (toRemove != null)
             {
                 bookings.Remove(toRemove);
@@ -48,3 +49,4 @@ namespace BsssDLogic
         }
     }
 }
+
