@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BsssCommon;
+using BsssDLogic;
 
 
 
@@ -18,7 +19,8 @@ namespace BsssDLogic
         {
             // bsssDService = new InMemoryDataService();
             //bsssDService = new TextFileDataService();
-            bsssDService = new JsonFileDataService();
+            //bsssDService = new JsonFileDataService();
+            bsssDService = new DBDataService();
         }
 
         public void Create(Booking booking)

@@ -9,6 +9,7 @@ namespace BsssCommon
     public class Booking
 
     {
+
         public string Name { get; set; }
         public string Contact { get; set; }
         public DateTime DateTime { get; set; }

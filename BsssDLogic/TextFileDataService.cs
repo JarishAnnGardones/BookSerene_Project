@@ -78,6 +78,7 @@ namespace BsssDLogic
             }
         }
 
+
         public bool DeleteBooking(Booking booking)
         {
             var toRemove = bookings.FirstOrDefault(b => b.Contact == booking.Contact);
