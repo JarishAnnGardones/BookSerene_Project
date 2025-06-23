@@ -35,7 +35,7 @@ namespace BookSerene
                     case 5: CancelBooking(); break;
                     case 6: UpdateBooking(); break;
                     case 7:
-                        Console.WriteLine("Thank you for choosing Serene Spa & Salon!");
+                        Console.WriteLine("\nYour booking has been successfully made");
                         running = false;
                         break;
                     default:
@@ -199,5 +199,6 @@ namespace BookSerene
         }
     }
 }
+
 
 

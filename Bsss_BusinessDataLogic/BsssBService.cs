@@ -29,6 +29,7 @@ namespace BsssBLogic
             dataService.Create(booking);
         }
 
+
         public List<Booking> GetAllBookings() => dataService.GetAll();
 
         public bool Cancel(Booking booking) => dataService.Delete(booking);
