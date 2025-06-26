@@ -19,8 +19,8 @@ namespace BsssDLogic
         {
             // bsssDService = new InMemoryDataService();
             //bsssDService = new TextFileDataService();
-            bsssDService = new JsonFileDataService();
-            //bsssDService = new DBDataService();
+            //bsssDService = new JsonFileDataService();
+            bsssDService = new DBDataService();
         }
 
         public void Create(Booking booking)

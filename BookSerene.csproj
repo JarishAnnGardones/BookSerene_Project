@@ -8,14 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="BsssAPI\**" />
     <Compile Remove="BsssCommon\**" />
     <Compile Remove="BsssDLogic\**" />
     <Compile Remove="Bsss_BusinessDataLogic\**" />
     <Compile Remove="Bsss_Desktop\**" />
+    <EmbeddedResource Remove="BsssAPI\**" />
     <EmbeddedResource Remove="BsssCommon\**" />
     <EmbeddedResource Remove="BsssDLogic\**" />
     <EmbeddedResource Remove="Bsss_BusinessDataLogic\**" />
     <EmbeddedResource Remove="Bsss_Desktop\**" />
+    <None Remove="BsssAPI\**" />
     <None Remove="BsssCommon\**" />
     <None Remove="BsssDLogic\**" />
     <None Remove="Bsss_BusinessDataLogic\**" />
