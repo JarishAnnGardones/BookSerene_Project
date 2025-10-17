@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BsssCommon\BsssCommon.csproj" />
-    <ProjectReference Include="..\BsssDLogic\BsssDLogic.csproj" />
     <ProjectReference Include="..\Bsss_BusinessDataLogic\BsssBLogic.csproj" />
   </ItemGroup>
 
