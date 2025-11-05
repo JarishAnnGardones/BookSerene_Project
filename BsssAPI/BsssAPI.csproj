@@ -11,8 +11,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BsssCommon\BsssCommon.csproj" />
-    <ProjectReference Include="..\Bsss_BusinessDataLogic\BsssBLogic.csproj" />
+    <Reference Include="BsssBLogic">
+      <HintPath>..\bin\Debug\net8.0\BsssBLogic.dll</HintPath>
+    </Reference>
+    <Reference Include="BsssCommon">
+      <HintPath>..\bin\Debug\net8.0\BsssCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="BsssDLogic">
+      <HintPath>..\bin\Debug\net8.0\BsssDLogic.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="BsssCommon\BsssCommon.csproj" />
     <ProjectReference Include="Bsss_BusinessDataLogic\BsssBLogic.csproj" />
   </ItemGroup>
 

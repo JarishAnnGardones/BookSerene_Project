@@ -7,18 +7,26 @@ using BsssDLogic;
 using BsssCommon;
 
 
-namespace BsssBLogic 
-{
-        public class BsssBService
-        {
-        private BsssDService dataService = new BsssDService();
 
+namespace BsssBLogic
+{
+    public class BsssBService
+    {
+            BsssDService dataService = new BsssDService();
+            private readonly EmailService _emailService;
+
+            public BsssBService(EmailService emailService)
+            {
+                _emailService = emailService;
+            }
         public string[] Services = {
             "Massages", "Facials", "Body Treatments", "Hair Services", "Nail Services", "Makeup Services"
         };
-
-        public void Book(string name, string contact, DateTime dateTime, string service)
+        public bool Book(string name, string contact, DateTime dateTime, string service)
         {
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(service))
+                return false;
+
             var booking = new Booking
             {
                 Name = name,
@@ -29,24 +37,22 @@ namespace BsssBLogic
 
             dataService.Create(booking);
 
-            EmailService emailService = new EmailService();
             string subject = "Booking Confirmed!";
             string body = $"[{DateTime.Now:yyyy-MM-dd hh:mm tt}] Hello {booking.Name},\n\n" +
                           $"Your booking for '{booking.Service}' on {booking.DateTime:MMMM dd, yyyy hh:mm tt} " +
                           $"has been successfully confirmed.\n\nThank you for choosing BookSerene!";
 
-            emailService.SendEmail(subject, body);
+            _emailService.SendEmail(booking.Contact ?? "sample@example.com", subject, body);
+            return true;
         }
 
         public List<string> GetAllBookings()
         {
-            var bookings = dataService.GetAll();
-
+            var bookings = dataService.GetAll() ?? new List<Booking>();
             return bookings.Select(b =>
                 $"Name: {b.Name}, Contact: {b.Contact}, Service: {b.Service}, Date: {b.DateTime:MMMM dd, yyyy hh:mm tt}"
             ).ToList();
         }
-
 
         public bool CancelByName(string name)
         {
@@ -60,28 +66,24 @@ namespace BsssBLogic
 
             if (result)
             {
-                EmailService emailService = new EmailService();
                 string subject = "Booking Cancelled";
                 string body = $"[{DateTime.Now:yyyy-MM-dd hh:mm tt}] Dear {booking.Name},\n\n" +
                               $"Your booking for '{booking.Service}' scheduled on {booking.DateTime:MMMM dd, yyyy hh:mm tt} " +
                               $"has been cancelled as per your request.\n\nWe hope to serve you again soon.";
 
-                emailService.SendEmail(subject, body);
+                _emailService.SendEmail(booking.Contact ?? "sample@example.com", subject, body);
             }
 
             return result;
         }
 
-
         public List<string> SearchBookingsByName(string name)
         {
-            var bookings = dataService.SearchByName(name);
-
+            var bookings = dataService.SearchByName(name) ?? new List<Booking>();
             return bookings.Select(b =>
                 $"Name: {b.Name}, Contact: {b.Contact}, Service: {b.Service}, Date: {b.DateTime:MMMM dd, yyyy hh:mm tt}"
             ).ToList();
         }
-
 
         public bool UpdateBookingByName(string name, string newService, DateTime newDateTime)
         {
@@ -95,7 +97,6 @@ namespace BsssBLogic
             booking.DateTime = newDateTime;
             dataService.Update(booking);
 
-            EmailService emailService = new EmailService();
             string subject = "Booking Updated!";
             string body = $"[{DateTime.Now:yyyy-MM-dd hh:mm tt}] Hello {booking.Name},\n\n" +
                           $"Your booking has been updated successfully.\n\n" +
@@ -103,7 +104,7 @@ namespace BsssBLogic
                           $"New Schedule: {booking.DateTime:MMMM dd, yyyy hh:mm tt}\n\n" +
                           $"Thank you for staying with BookSerene!";
 
-            emailService.SendEmail(subject, body);
+            _emailService.SendEmail(booking.Contact ?? "sample@example.com", subject, body);
             return true;
         }
     }

@@ -1,43 +1,46 @@
-﻿using Azure.Identity;
-using BsssCommon;
+﻿
 using MailKit.Net.Smtp;
 using MimeKit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using MailKit.Security;
+
 
 namespace BsssBLogic
 {
 
     public class EmailService
     {
-        public void SendEmail(string subject, string body)
-        {
-            
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("BookSerene Transaction", "do-not-reply@bookserene.com"));
-            message.To.Add(new MailboxAddress("Name", "user@example.com"));
-            message.Subject = subject;
-            message.Body = new TextPart("plain")
-            {
-                Text = body
-            };
+        private readonly IConfiguration _configuration;
 
-            
+        public EmailService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        public void SendEmail(string recipientEmail, string subject, string body)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress(
+                _configuration["EmailSettings:FromName"],
+                _configuration["EmailSettings:FromEmail"]
+            ));
+
+            message.To.Add(new MailboxAddress("Customer", recipientEmail));
+            message.Subject = subject;
+            message.Body = new TextPart("plain") { Text = body };
+
             using (var client = new SmtpClient())
             {
-                var smtpHost = "sandbox.smtp.mailtrap.io";
-                var smtpPort = 2525;
-                var tls = MailKit.Security.SecureSocketOptions.StartTls;
+                client.Connect(
+                    _configuration["EmailSettings:SmtpHost"],
+                    int.Parse(_configuration["EmailSettings:SmtpPort"]),
+                    SecureSocketOptions.StartTls
+                );
 
-                client.Connect(smtpHost, smtpPort, tls);
-
-                var userName = "18aa49a939f031";
-                var password = "94bdddecd00c0b";
-
-                client.Authenticate(userName, password);
+                client.Authenticate(
+                    _configuration["EmailSettings:Username"],
+                    _configuration["EmailSettings:Password"]
+                );
 
                 client.Send(message);
                 client.Disconnect(true);
@@ -45,4 +48,5 @@ namespace BsssBLogic
         }
     }
 }
+
 

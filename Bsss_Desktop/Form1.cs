@@ -55,7 +55,7 @@ namespace Bsss_Desktop
             var newDate = dtpDate.Value.Date + dtpTime.Value.TimeOfDay;
             var newService = cmbService.SelectedItem?.ToString() ?? selectedBooking.Service;
 
-            bookingService.UpdateBooking(selectedBooking, newService, newDate);
+            bookingService.UpdateBookingByName(selectedBooking.Name, newService, newDate);
             LoadBookings();
         }
 
@@ -68,7 +68,7 @@ namespace Bsss_Desktop
             }
 
             var selectedBooking = (Booking)dgvBookings.SelectedRows[0].DataBoundItem;
-            bookingService.Cancel(selectedBooking);
+            bookingService.CancelByName(selectedBooking.Name);
             LoadBookings();
         }
 
