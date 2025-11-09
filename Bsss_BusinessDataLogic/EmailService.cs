@@ -17,29 +17,30 @@ namespace BsssBLogic
             _configuration = configuration;
         }
 
+        // General purpose email sender
         public void SendEmail(string recipientEmail, string subject, string body)
         {
-            var fromEmail = _configuration["EmailSettings:FromEmail"];
-            var fromName = _configuration["EmailSettings:FromName"];
-
-            if (string.IsNullOrWhiteSpace(fromEmail))
-                throw new InvalidOperationException("EmailSettings:FromEmail is not configured properly.");
-
-            if (string.IsNullOrWhiteSpace(recipientEmail))
-                throw new ArgumentException("Recipient email cannot be null or empty.");
-
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress(fromName, fromEmail));
-            message.To.Add(MailboxAddress.Parse(recipientEmail));
+            message.From.Add(new MailboxAddress(
+                _configuration["EmailSettings:FromName"],
+                _configuration["EmailSettings:FromAddress"] 
+            ));
+            message.To.Add(new MailboxAddress("Customer", recipientEmail));
             message.Subject = subject;
-            message.Body = new TextPart("plain") { Text = body };
+            message.Body = new TextPart("plain")
+            {
+                Text = body
+            };
 
             using (var client = new SmtpClient())
             {
+                var enableTls = bool.Parse(_configuration["EmailSettings:EnableTls"]);
+                var socketOption = enableTls ? SecureSocketOptions.StartTls : SecureSocketOptions.Auto;
+
                 client.Connect(
                     _configuration["EmailSettings:Host"],
                     int.Parse(_configuration["EmailSettings:Port"]),
-                    SecureSocketOptions.StartTls
+                    socketOption
                 );
 
                 client.Authenticate(
@@ -53,5 +54,3 @@ namespace BsssBLogic
         }
     }
 }
-
-
