@@ -4,11 +4,14 @@ using System.Xml.Linq;
 using BsssBLogic;
 using BsssCommon;
 
+
 namespace Bsss_Desktop
 {
     public partial class Form1 : Form
     {
-        private BsssBService bookingService = new BsssBService();
+        
+        private BsssBService bookingService = new BsssBService ();
+        
         public Form1()
         {
 
